@@ -1,0 +1,128 @@
+﻿<Window x:Class="CarpentryShop.Windows.CarpenterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarpentryShop.Windows"
+        mc:Ignorable="d"
+        
+        Title="CarpenterWindow" Height="807" Width="1320">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="4.7*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="CarpenterPhoto" Height="90" Width="90"></Image>
+        <StackPanel Grid.Row="3" Background="SaddleBrown"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Background="SaddleBrown"/>
+        <StackPanel Grid.Row="3" Grid.Column="2" Background="SaddleBrown"/>
+        <StackPanel Grid.Row="0" Grid.Column="3" Background="SaddleBrown"/>
+        <StackPanel Grid.Row="1" Grid.Column="3" Background="SaddleBrown"/>
+
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Мастер:"></TextBlock>
+            <TextBlock x:Name="NameTextBlock"></TextBlock>
+            <TextBlock x:Name="SurnameTextBlock"></TextBlock>
+            <Separator></Separator>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="Инвентарь" FontSize="48" FontWeight="Bold"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock Text="       Инструменты" FontSize="20"></TextBlock>
+            <TextBlock Text="                Материалы" FontSize="20"></TextBlock>
+            <TextBlock Text="            Деревянные детали" FontSize="20"/>
+            <TextBlock Text="   Металлические детали" FontSize="20"/>
+            <TextBlock Text="      Компоненты" FontSize="20"/>
+            <TextBlock ></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <ListView x:Name="ToolsList" Width="170" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding ImageTool}" Width="60" Height="60" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding NameTool}" TextWrapping="Wrap" MaxWidth="140"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="MaterialsList" HorizontalAlignment="Left" Width="170" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding ImageMaterial}" Width="60" Height="60" HorizontalAlignment="Left"></Image>
+                            <TextBlock Text="{Binding NameMaterial}" TextWrapping="Wrap" MaxWidth="140"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="WoodDetailsList" HorizontalAlignment="Left" Width="170" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding ImageWoodDetail}" Width="60" Height="60" HorizontalAlignment="Left"></Image>
+                            <TextBlock Text="{Binding NameWoodDetail}" TextWrapping="Wrap" MaxWidth="140"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="MetalDetailsList" HorizontalAlignment="Left" Width="170" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding ImageMetalDetail}" Width="60" Height="60" HorizontalAlignment="Left"></Image>
+                            <TextBlock Text="{Binding NameMetalDetail}" TextWrapping="Wrap" MaxWidth="140"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="ComponentsList" HorizontalAlignment="Left" Width="170" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding Image}" Width="60" Height="60" HorizontalAlignment="Left"></Image>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" MaxWidth="140"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
+            <Separator Height="10"></Separator>
+            <TextBlock Text="Инвентарь" HorizontalAlignment="Center"></TextBlock>
+            <Separator Height="10"></Separator>
+            <Button Content="Добавить инструмент" Margin="5" Click="EventAddTool" Width="167"></Button>
+            <Button Content="Добавить материал" Margin="5" Click="EventAddMaterial"></Button>
+            <Separator Height="10"></Separator>
+            <TextBlock Text="Инструкции к сборке" HorizontalAlignment="Center"></TextBlock>
+            <Separator Height="10"></Separator>
+            <Button Content="Детали" Margin="5" Click="EventViewDetailsReceipts"></Button>
+            <Button Content="Компоненты" Margin="5" Click="EventViewComponentsReceipts"></Button>
+            <Separator Height="10"></Separator>
+            <TextBlock Text="Рабочие места" HorizontalAlignment="Center"></TextBlock>
+            <Separator Height="10"></Separator>
+            <Button Content="СамСталь" Margin="5" Click="EventSamStalOpen"></Button>
+            <Button Content="Торцовка" Margin="5" Click="EventTrimmingOpen"></Button>
+            <Button Content="ЧПУ" Margin="5" Click="EventCncOpen"></Button>
+            <Button Content="Энкор" Margin="5" Click="EventEncoreOpen"></Button>
+            <Button Content="Верстак" Margin="5" Click="EventWorkBench"></Button>
+            <Button Content="Собрать изделие" Margin="5" Click="EventProductWorkBench"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content ="Обновить" Grid.ColumnSpan="2" Height="39" Margin="20,0,0,0" Width="168" Click="EventRefresh"/>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content ="Инструкция" Grid.ColumnSpan="2" Height="39" Margin="20,0,0,0" Width="168" Click="EventInstruction"/>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Content ="Склад" Grid.ColumnSpan="2" Height="39" Margin="20,0,0,0" Width="168" Click="EventStorage"/>
+        </StackPanel>
+    </Grid>
+</Window>

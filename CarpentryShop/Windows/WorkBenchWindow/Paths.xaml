@@ -1,0 +1,59 @@
+﻿<Window x:Class="CarpentryShop.Windows.WorkBenchWindow.Paths"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarpentryShop.Windows.WorkBenchWindow"
+        mc:Ignorable="d"
+        Title="Paths" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Text="Инструменты " HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="2" Text="Деревянные детали " HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="3" Text="Металлические детали" HorizontalAlignment="Center"></TextBlock>
+        <ListBox Grid.Row="1" Grid.Column="1" x:Name="ToolsList">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding ImageTool}"></Image>
+                        <TextBlock Text="{Binding NameTool}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.Row="1" Grid.Column="2" x:Name="WoodDetailsList">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding ImageWoodDetail}"></Image>
+                        <TextBlock Text="{Binding NameWoodDetail}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.Row="1" Grid.Column="3" x:Name="MetalDetailsList">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding ImageMetalDetail}"></Image>
+                        <TextBlock Text="{Binding NameMetalDetail}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="1">
+            <Button Content="Select" Click="EventAddSelectedItems"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
