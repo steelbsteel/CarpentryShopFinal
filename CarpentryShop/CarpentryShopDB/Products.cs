@@ -25,8 +25,8 @@ namespace CarpentryShop.CarpentryShopDB
         public byte[] ImageProduct { get; set; }
         public Nullable<int> idProductReceipt { get; set; }
     
+        public virtual ProductReceipts ProductReceipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StorageProduct> StorageProduct { get; set; }
-        public virtual ProductReceipts ProductReceipts { get; set; }
     }
 }

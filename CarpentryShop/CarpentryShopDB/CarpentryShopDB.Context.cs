@@ -25,8 +25,10 @@ namespace CarpentryShop.CarpentryShopDB
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Carpenter> Carpenter { get; set; }
         public virtual DbSet<ComponentReceipts> ComponentReceipts { get; set; }
+        public virtual DbSet<Components> Components { get; set; }
         public virtual DbSet<DetailReceipts> DetailReceipts { get; set; }
         public virtual DbSet<InventoryCarpenter> InventoryCarpenter { get; set; }
         public virtual DbSet<InventoryComponents> InventoryComponents { get; set; }
@@ -37,14 +39,12 @@ namespace CarpentryShop.CarpentryShopDB
         public virtual DbSet<Machines> Machines { get; set; }
         public virtual DbSet<Materials> Materials { get; set; }
         public virtual DbSet<MetalDetails> MetalDetails { get; set; }
+        public virtual DbSet<ProductReceipts> ProductReceipts { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Storage> Storage { get; set; }
         public virtual DbSet<StorageProduct> StorageProduct { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tools> Tools { get; set; }
         public virtual DbSet<TypeMaterials> TypeMaterials { get; set; }
         public virtual DbSet<WoodDetails> WoodDetails { get; set; }
-        public virtual DbSet<Components> Components { get; set; }
-        public virtual DbSet<ProductReceipts> ProductReceipts { get; set; }
     }
 }

@@ -13,8 +13,6 @@
           <Property Name="NameCarpenter" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SurnameCarpenter" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ImageCarpenter" Type="image" />
-          <Property Name="StaminaCarpenter" Type="int" Nullable="false" />
-          <Property Name="BalanceCarpenter" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ComponentReceipts">
           <Key>
@@ -594,169 +592,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarpentryShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Carpenter">
-          <Key>
-            <PropertyRef Name="idCarpenter" />
-          </Key>
-          <Property Name="idCarpenter" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameCarpenter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SurnameCarpenter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageCarpenter" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="StaminaCarpenter" Type="Int32" Nullable="false" />
-          <Property Name="BalanceCarpenter" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryCarpenter_Carpenter" FromRole="Carpenter" ToRole="InventoryCarpenter" />
-        </EntityType>
-        <EntityType Name="ComponentReceipts">
-          <Key>
-            <PropertyRef Name="idCompontentReceipt" />
-          </Key>
-          <Property Name="idCompontentReceipt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idWoodDetail" Type="Int32" />
-          <Property Name="idTool" Type="Int32" />
-          <Property Name="idMachine" Type="Int32" />
-          <Property Name="idMetalDetail" Type="Int32" />
-          <NavigationProperty Name="MetalDetails" Relationship="Self.FK_ComponentReceipts_MetalDetails" FromRole="ComponentReceipts" ToRole="MetalDetails" />
-          <NavigationProperty Name="WoodDetails" Relationship="Self.FK_ComponentReceipts_WoodDetails" FromRole="ComponentReceipts" ToRole="WoodDetails" />
-          <NavigationProperty Name="Components" Relationship="CarpentryShopModel.FK_Components_ComponentReceipts" FromRole="ComponentReceipts" ToRole="Components" />
-        </EntityType>
-        <EntityType Name="DetailReceipts">
-          <Key>
-            <PropertyRef Name="idDetailReceipt" />
-          </Key>
-          <Property Name="idDetailReceipt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idMaterial" Type="Int32" />
-          <Property Name="idTool" Type="Int32" />
-          <Property Name="idMachine" Type="Int32" />
-          <NavigationProperty Name="Machines" Relationship="Self.FK_DetailReceipts_Machines" FromRole="DetailReceipts" ToRole="Machines" />
-          <NavigationProperty Name="Materials" Relationship="Self.FK_DetailReceipts_Materials" FromRole="DetailReceipts" ToRole="Materials" />
-          <NavigationProperty Name="Tools" Relationship="Self.FK_DetailReceipts_Tools" FromRole="DetailReceipts" ToRole="Tools" />
-          <NavigationProperty Name="MetalDetails" Relationship="Self.FK_Details_DetailReceipts" FromRole="DetailReceipts" ToRole="MetalDetails" />
-          <NavigationProperty Name="WoodDetails" Relationship="Self.FK_WoodDetails_DetailReceipts" FromRole="DetailReceipts" ToRole="WoodDetails" />
-        </EntityType>
-        <EntityType Name="InventoryCarpenter">
-          <Key>
-            <PropertyRef Name="idInventory" />
-          </Key>
-          <Property Name="idInventory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idCarpenter" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carpenter" Relationship="Self.FK_InventoryCarpenter_Carpenter" FromRole="InventoryCarpenter" ToRole="Carpenter" />
-          <NavigationProperty Name="InventoryComponents" Relationship="Self.FK_InventoryComponents_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryComponents" />
-          <NavigationProperty Name="InventoryMaterials" Relationship="Self.FK_InventoryMaterials_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryMaterials" />
-          <NavigationProperty Name="InventoryMetalDetails" Relationship="Self.FK_InventoryMetalDetails_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryMetalDetails" />
-          <NavigationProperty Name="InventoryTools" Relationship="Self.FK_InventoryTools_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryTools" />
-          <NavigationProperty Name="InventoryWoodDetails" Relationship="Self.FK_InventoryWoodDetails_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryWoodDetails" />
-        </EntityType>
-        <EntityType Name="InventoryComponents">
-          <Key>
-            <PropertyRef Name="idInventoryComponent" />
-          </Key>
-          <Property Name="idInventoryComponent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idComponent" Type="Int32" Nullable="false" />
-          <Property Name="idInventory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryComponents_InventoryCarpenter" FromRole="InventoryComponents" ToRole="InventoryCarpenter" />
-        </EntityType>
-        <EntityType Name="InventoryMaterials">
-          <Key>
-            <PropertyRef Name="idInventoryMaterial" />
-          </Key>
-          <Property Name="idInventoryMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idMaterial" Type="Int32" Nullable="false" />
-          <Property Name="idInventory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryMaterials_InventoryCarpenter" FromRole="InventoryMaterials" ToRole="InventoryCarpenter" />
-          <NavigationProperty Name="Materials" Relationship="Self.FK_InventoryMaterials_Materials" FromRole="InventoryMaterials" ToRole="Materials" />
-        </EntityType>
-        <EntityType Name="InventoryMetalDetails">
-          <Key>
-            <PropertyRef Name="idInventoryMetalDetail" />
-          </Key>
-          <Property Name="idInventoryMetalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idMetalDetail" Type="Int32" Nullable="false" />
-          <Property Name="idInventory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryMetalDetails_InventoryCarpenter" FromRole="InventoryMetalDetails" ToRole="InventoryCarpenter" />
-          <NavigationProperty Name="MetalDetails" Relationship="Self.FK_InventoryDetails_Details" FromRole="InventoryMetalDetails" ToRole="MetalDetails" />
-        </EntityType>
-        <EntityType Name="InventoryTools">
-          <Key>
-            <PropertyRef Name="idInventoryTool" />
-          </Key>
-          <Property Name="idInventoryTool" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTool" Type="Int32" Nullable="false" />
-          <Property Name="idInventory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryTools_InventoryCarpenter" FromRole="InventoryTools" ToRole="InventoryCarpenter" />
-          <NavigationProperty Name="Tools" Relationship="Self.FK_InventoryTools_Tools" FromRole="InventoryTools" ToRole="Tools" />
-        </EntityType>
-        <EntityType Name="InventoryWoodDetails">
-          <Key>
-            <PropertyRef Name="idInventoryWoodDetail" />
-          </Key>
-          <Property Name="idInventoryWoodDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idWoodDetail" Type="Int32" Nullable="false" />
-          <Property Name="idInventory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InventoryCarpenter" Relationship="Self.FK_InventoryWoodDetails_InventoryCarpenter" FromRole="InventoryWoodDetails" ToRole="InventoryCarpenter" />
-          <NavigationProperty Name="WoodDetails" Relationship="Self.FK_InventoryWoodDetails_WoodDetails" FromRole="InventoryWoodDetails" ToRole="WoodDetails" />
-        </EntityType>
-        <EntityType Name="Machines">
-          <Key>
-            <PropertyRef Name="idMachine" />
-          </Key>
-          <Property Name="idMachine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameMachine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageMachine" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="DetailReceipts" Relationship="Self.FK_DetailReceipts_Machines" FromRole="Machines" ToRole="DetailReceipts" />
-        </EntityType>
-        <EntityType Name="Materials">
-          <Key>
-            <PropertyRef Name="idMaterial" />
-          </Key>
-          <Property Name="idMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTypeMaterial" Type="Int32" Nullable="false" />
-          <Property Name="ImageMaterial" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="NameMaterial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="DetailReceipts" Relationship="Self.FK_DetailReceipts_Materials" FromRole="Materials" ToRole="DetailReceipts" />
-          <NavigationProperty Name="InventoryMaterials" Relationship="Self.FK_InventoryMaterials_Materials" FromRole="Materials" ToRole="InventoryMaterials" />
-          <NavigationProperty Name="TypeMaterials" Relationship="Self.FK_Materials_TypeMaterials" FromRole="Materials" ToRole="TypeMaterials" />
-        </EntityType>
-        <EntityType Name="MetalDetails">
-          <Key>
-            <PropertyRef Name="idMetalDetail" />
-          </Key>
-          <Property Name="idMetalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameMetalDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageMetalDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="idDetailReceipt" Type="Int32" />
-          <NavigationProperty Name="ComponentReceipts" Relationship="Self.FK_ComponentReceipts_MetalDetails" FromRole="MetalDetails" ToRole="ComponentReceipts" />
-          <NavigationProperty Name="DetailReceipts" Relationship="Self.FK_Details_DetailReceipts" FromRole="MetalDetails" ToRole="DetailReceipts" />
-          <NavigationProperty Name="InventoryMetalDetails" Relationship="Self.FK_InventoryDetails_Details" FromRole="MetalDetails" ToRole="InventoryMetalDetails" />
-        </EntityType>
-        <EntityType Name="Products">
-          <Key>
-            <PropertyRef Name="idProduct" />
-          </Key>
-          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="idProductReceipt" Type="Int32" />
-          <NavigationProperty Name="StorageProduct" Relationship="Self.FK_StorageProduct_Products" FromRole="Products" ToRole="StorageProduct" />
-          <NavigationProperty Name="ProductReceipts" Relationship="CarpentryShopModel.FK_Products_ProductReceipts" FromRole="Products" ToRole="ProductReceipts" />
-        </EntityType>
-        <EntityType Name="Storage">
-          <Key>
-            <PropertyRef Name="idStorage" />
-          </Key>
-          <Property Name="idStorage" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="StorageProduct" Relationship="Self.FK_StorageProduct_Storage" FromRole="Storage" ToRole="StorageProduct" />
-        </EntityType>
-        <EntityType Name="StorageProduct">
-          <Key>
-            <PropertyRef Name="idStorageProduct" />
-          </Key>
-          <Property Name="idStorageProduct" Type="Int32" Nullable="false" />
-          <Property Name="idProduct" Type="Int32" Nullable="false" />
-          <Property Name="idStorage" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_StorageProduct_Products" FromRole="StorageProduct" ToRole="Products" />
-          <NavigationProperty Name="Storage" Relationship="Self.FK_StorageProduct_Storage" FromRole="StorageProduct" ToRole="Storage" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -767,378 +602,40 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Tools">
-          <Key>
-            <PropertyRef Name="idTool" />
-          </Key>
-          <Property Name="idTool" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameTool" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageTool" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="DetailReceipts" Relationship="Self.FK_DetailReceipts_Tools" FromRole="Tools" ToRole="DetailReceipts" />
-          <NavigationProperty Name="InventoryTools" Relationship="Self.FK_InventoryTools_Tools" FromRole="Tools" ToRole="InventoryTools" />
-        </EntityType>
-        <EntityType Name="TypeMaterials">
-          <Key>
-            <PropertyRef Name="idTypeMaterial" />
-          </Key>
-          <Property Name="idTypeMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Materials" Relationship="Self.FK_Materials_TypeMaterials" FromRole="TypeMaterials" ToRole="Materials" />
-        </EntityType>
-        <EntityType Name="WoodDetails">
-          <Key>
-            <PropertyRef Name="idWoodDetail" />
-          </Key>
-          <Property Name="idWoodDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameWoodDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImageWoodDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="idDetailReceipt" Type="Int32" />
-          <NavigationProperty Name="ComponentReceipts" Relationship="Self.FK_ComponentReceipts_WoodDetails" FromRole="WoodDetails" ToRole="ComponentReceipts" />
-          <NavigationProperty Name="DetailReceipts" Relationship="Self.FK_WoodDetails_DetailReceipts" FromRole="WoodDetails" ToRole="DetailReceipts" />
-          <NavigationProperty Name="InventoryWoodDetails" Relationship="Self.FK_InventoryWoodDetails_WoodDetails" FromRole="WoodDetails" ToRole="InventoryWoodDetails" />
-        </EntityType>
-        <Association Name="FK_InventoryCarpenter_Carpenter">
-          <End Role="Carpenter" Type="Self.Carpenter" Multiplicity="1" />
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carpenter">
-              <PropertyRef Name="idCarpenter" />
-            </Principal>
-            <Dependent Role="InventoryCarpenter">
-              <PropertyRef Name="idCarpenter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComponentReceipts_MetalDetails">
-          <End Role="MetalDetails" Type="Self.MetalDetails" Multiplicity="0..1" />
-          <End Role="ComponentReceipts" Type="Self.ComponentReceipts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MetalDetails">
-              <PropertyRef Name="idMetalDetail" />
-            </Principal>
-            <Dependent Role="ComponentReceipts">
-              <PropertyRef Name="idMetalDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComponentReceipts_WoodDetails">
-          <End Role="WoodDetails" Type="Self.WoodDetails" Multiplicity="0..1" />
-          <End Role="ComponentReceipts" Type="Self.ComponentReceipts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WoodDetails">
-              <PropertyRef Name="idWoodDetail" />
-            </Principal>
-            <Dependent Role="ComponentReceipts">
-              <PropertyRef Name="idWoodDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetailReceipts_Machines">
-          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
-          <End Role="DetailReceipts" Type="Self.DetailReceipts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Machines">
-              <PropertyRef Name="idMachine" />
-            </Principal>
-            <Dependent Role="DetailReceipts">
-              <PropertyRef Name="idMachine" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetailReceipts_Materials">
-          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
-          <End Role="DetailReceipts" Type="Self.DetailReceipts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materials">
-              <PropertyRef Name="idMaterial" />
-            </Principal>
-            <Dependent Role="DetailReceipts">
-              <PropertyRef Name="idMaterial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetailReceipts_Tools">
-          <End Role="Tools" Type="Self.Tools" Multiplicity="0..1" />
-          <End Role="DetailReceipts" Type="Self.DetailReceipts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tools">
-              <PropertyRef Name="idTool" />
-            </Principal>
-            <Dependent Role="DetailReceipts">
-              <PropertyRef Name="idTool" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Details_DetailReceipts">
-          <End Role="DetailReceipts" Type="Self.DetailReceipts" Multiplicity="0..1" />
-          <End Role="MetalDetails" Type="Self.MetalDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetailReceipts">
-              <PropertyRef Name="idDetailReceipt" />
-            </Principal>
-            <Dependent Role="MetalDetails">
-              <PropertyRef Name="idDetailReceipt" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WoodDetails_DetailReceipts">
-          <End Role="DetailReceipts" Type="Self.DetailReceipts" Multiplicity="0..1" />
-          <End Role="WoodDetails" Type="Self.WoodDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetailReceipts">
-              <PropertyRef Name="idDetailReceipt" />
-            </Principal>
-            <Dependent Role="WoodDetails">
-              <PropertyRef Name="idDetailReceipt" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryComponents_InventoryCarpenter">
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="1" />
-          <End Role="InventoryComponents" Type="Self.InventoryComponents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InventoryCarpenter">
-              <PropertyRef Name="idInventory" />
-            </Principal>
-            <Dependent Role="InventoryComponents">
-              <PropertyRef Name="idInventory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryMaterials_InventoryCarpenter">
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="1" />
-          <End Role="InventoryMaterials" Type="Self.InventoryMaterials" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InventoryCarpenter">
-              <PropertyRef Name="idInventory" />
-            </Principal>
-            <Dependent Role="InventoryMaterials">
-              <PropertyRef Name="idInventory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryMetalDetails_InventoryCarpenter">
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="1" />
-          <End Role="InventoryMetalDetails" Type="Self.InventoryMetalDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InventoryCarpenter">
-              <PropertyRef Name="idInventory" />
-            </Principal>
-            <Dependent Role="InventoryMetalDetails">
-              <PropertyRef Name="idInventory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryTools_InventoryCarpenter">
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="1" />
-          <End Role="InventoryTools" Type="Self.InventoryTools" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InventoryCarpenter">
-              <PropertyRef Name="idInventory" />
-            </Principal>
-            <Dependent Role="InventoryTools">
-              <PropertyRef Name="idInventory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryWoodDetails_InventoryCarpenter">
-          <End Role="InventoryCarpenter" Type="Self.InventoryCarpenter" Multiplicity="1" />
-          <End Role="InventoryWoodDetails" Type="Self.InventoryWoodDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InventoryCarpenter">
-              <PropertyRef Name="idInventory" />
-            </Principal>
-            <Dependent Role="InventoryWoodDetails">
-              <PropertyRef Name="idInventory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryMaterials_Materials">
-          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
-          <End Role="InventoryMaterials" Type="Self.InventoryMaterials" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materials">
-              <PropertyRef Name="idMaterial" />
-            </Principal>
-            <Dependent Role="InventoryMaterials">
-              <PropertyRef Name="idMaterial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryDetails_Details">
-          <End Role="MetalDetails" Type="Self.MetalDetails" Multiplicity="1" />
-          <End Role="InventoryMetalDetails" Type="Self.InventoryMetalDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MetalDetails">
-              <PropertyRef Name="idMetalDetail" />
-            </Principal>
-            <Dependent Role="InventoryMetalDetails">
-              <PropertyRef Name="idMetalDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryTools_Tools">
-          <End Role="Tools" Type="Self.Tools" Multiplicity="1" />
-          <End Role="InventoryTools" Type="Self.InventoryTools" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tools">
-              <PropertyRef Name="idTool" />
-            </Principal>
-            <Dependent Role="InventoryTools">
-              <PropertyRef Name="idTool" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventoryWoodDetails_WoodDetails">
-          <End Role="WoodDetails" Type="Self.WoodDetails" Multiplicity="1" />
-          <End Role="InventoryWoodDetails" Type="Self.InventoryWoodDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WoodDetails">
-              <PropertyRef Name="idWoodDetail" />
-            </Principal>
-            <Dependent Role="InventoryWoodDetails">
-              <PropertyRef Name="idWoodDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Materials_TypeMaterials">
-          <End Role="TypeMaterials" Type="Self.TypeMaterials" Multiplicity="1" />
-          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeMaterials">
-              <PropertyRef Name="idTypeMaterial" />
-            </Principal>
-            <Dependent Role="Materials">
-              <PropertyRef Name="idTypeMaterial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StorageProduct_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="StorageProduct" Type="Self.StorageProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="idProduct" />
-            </Principal>
-            <Dependent Role="StorageProduct">
-              <PropertyRef Name="idProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StorageProduct_Storage">
-          <End Role="Storage" Type="Self.Storage" Multiplicity="1" />
-          <End Role="StorageProduct" Type="Self.StorageProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Storage">
-              <PropertyRef Name="idStorage" />
-            </Principal>
-            <Dependent Role="StorageProduct">
-              <PropertyRef Name="idStorage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CarpentryShopEntities3" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Carpenter" EntityType="Self.Carpenter" />
-          <EntitySet Name="ComponentReceipts" EntityType="Self.ComponentReceipts" />
-          <EntitySet Name="DetailReceipts" EntityType="Self.DetailReceipts" />
-          <EntitySet Name="InventoryCarpenter" EntityType="Self.InventoryCarpenter" />
-          <EntitySet Name="InventoryComponents" EntityType="Self.InventoryComponents" />
-          <EntitySet Name="InventoryMaterials" EntityType="Self.InventoryMaterials" />
-          <EntitySet Name="InventoryMetalDetails" EntityType="Self.InventoryMetalDetails" />
-          <EntitySet Name="InventoryTools" EntityType="Self.InventoryTools" />
-          <EntitySet Name="InventoryWoodDetails" EntityType="Self.InventoryWoodDetails" />
-          <EntitySet Name="Machines" EntityType="Self.Machines" />
-          <EntitySet Name="Materials" EntityType="Self.Materials" />
-          <EntitySet Name="MetalDetails" EntityType="Self.MetalDetails" />
-          <EntitySet Name="Products" EntityType="Self.Products" />
-          <EntitySet Name="Storage" EntityType="Self.Storage" />
-          <EntitySet Name="StorageProduct" EntityType="Self.StorageProduct" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Tools" EntityType="Self.Tools" />
-          <EntitySet Name="TypeMaterials" EntityType="Self.TypeMaterials" />
-          <EntitySet Name="WoodDetails" EntityType="Self.WoodDetails" />
-          <AssociationSet Name="FK_InventoryCarpenter_Carpenter" Association="Self.FK_InventoryCarpenter_Carpenter">
+          <EntitySet Name="Carpenter" EntityType="CarpentryShopModel.Carpenter" />
+          <EntitySet Name="ComponentReceipts" EntityType="CarpentryShopModel.ComponentReceipts" />
+          <EntitySet Name="Components" EntityType="CarpentryShopModel.Components" />
+          <EntitySet Name="DetailReceipts" EntityType="CarpentryShopModel.DetailReceipts" />
+          <EntitySet Name="InventoryCarpenter" EntityType="CarpentryShopModel.InventoryCarpenter" />
+          <EntitySet Name="InventoryComponents" EntityType="CarpentryShopModel.InventoryComponents" />
+          <EntitySet Name="InventoryMaterials" EntityType="CarpentryShopModel.InventoryMaterials" />
+          <EntitySet Name="InventoryMetalDetails" EntityType="CarpentryShopModel.InventoryMetalDetails" />
+          <EntitySet Name="InventoryTools" EntityType="CarpentryShopModel.InventoryTools" />
+          <EntitySet Name="InventoryWoodDetails" EntityType="CarpentryShopModel.InventoryWoodDetails" />
+          <EntitySet Name="Machines" EntityType="CarpentryShopModel.Machines" />
+          <EntitySet Name="Materials" EntityType="CarpentryShopModel.Materials" />
+          <EntitySet Name="MetalDetails" EntityType="CarpentryShopModel.MetalDetails" />
+          <EntitySet Name="ProductReceipts" EntityType="CarpentryShopModel.ProductReceipts" />
+          <EntitySet Name="Products" EntityType="CarpentryShopModel.Products" />
+          <EntitySet Name="Storage" EntityType="CarpentryShopModel.Storage" />
+          <EntitySet Name="StorageProduct" EntityType="CarpentryShopModel.StorageProduct" />
+          <EntitySet Name="Tools" EntityType="CarpentryShopModel.Tools" />
+          <EntitySet Name="TypeMaterials" EntityType="CarpentryShopModel.TypeMaterials" />
+          <EntitySet Name="WoodDetails" EntityType="CarpentryShopModel.WoodDetails" />
+          <AssociationSet Name="FK_InventoryCarpenter_Carpenter" Association="CarpentryShopModel.FK_InventoryCarpenter_Carpenter">
             <End Role="Carpenter" EntitySet="Carpenter" />
             <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComponentReceipts_MetalDetails" Association="Self.FK_ComponentReceipts_MetalDetails">
+          <AssociationSet Name="FK_ComponentReceipts_MetalDetails" Association="CarpentryShopModel.FK_ComponentReceipts_MetalDetails">
             <End Role="MetalDetails" EntitySet="MetalDetails" />
             <End Role="ComponentReceipts" EntitySet="ComponentReceipts" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComponentReceipts_WoodDetails" Association="Self.FK_ComponentReceipts_WoodDetails">
+          <AssociationSet Name="FK_ComponentReceipts_WoodDetails" Association="CarpentryShopModel.FK_ComponentReceipts_WoodDetails">
             <End Role="WoodDetails" EntitySet="WoodDetails" />
             <End Role="ComponentReceipts" EntitySet="ComponentReceipts" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetailReceipts_Machines" Association="Self.FK_DetailReceipts_Machines">
-            <End Role="Machines" EntitySet="Machines" />
-            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetailReceipts_Materials" Association="Self.FK_DetailReceipts_Materials">
-            <End Role="Materials" EntitySet="Materials" />
-            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetailReceipts_Tools" Association="Self.FK_DetailReceipts_Tools">
-            <End Role="Tools" EntitySet="Tools" />
-            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Details_DetailReceipts" Association="Self.FK_Details_DetailReceipts">
-            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
-            <End Role="MetalDetails" EntitySet="MetalDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WoodDetails_DetailReceipts" Association="Self.FK_WoodDetails_DetailReceipts">
-            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
-            <End Role="WoodDetails" EntitySet="WoodDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryComponents_InventoryCarpenter" Association="Self.FK_InventoryComponents_InventoryCarpenter">
-            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
-            <End Role="InventoryComponents" EntitySet="InventoryComponents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryMaterials_InventoryCarpenter" Association="Self.FK_InventoryMaterials_InventoryCarpenter">
-            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
-            <End Role="InventoryMaterials" EntitySet="InventoryMaterials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryMetalDetails_InventoryCarpenter" Association="Self.FK_InventoryMetalDetails_InventoryCarpenter">
-            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
-            <End Role="InventoryMetalDetails" EntitySet="InventoryMetalDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryTools_InventoryCarpenter" Association="Self.FK_InventoryTools_InventoryCarpenter">
-            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
-            <End Role="InventoryTools" EntitySet="InventoryTools" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryWoodDetails_InventoryCarpenter" Association="Self.FK_InventoryWoodDetails_InventoryCarpenter">
-            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
-            <End Role="InventoryWoodDetails" EntitySet="InventoryWoodDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryMaterials_Materials" Association="Self.FK_InventoryMaterials_Materials">
-            <End Role="Materials" EntitySet="Materials" />
-            <End Role="InventoryMaterials" EntitySet="InventoryMaterials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryDetails_Details" Association="Self.FK_InventoryDetails_Details">
-            <End Role="MetalDetails" EntitySet="MetalDetails" />
-            <End Role="InventoryMetalDetails" EntitySet="InventoryMetalDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryTools_Tools" Association="Self.FK_InventoryTools_Tools">
-            <End Role="Tools" EntitySet="Tools" />
-            <End Role="InventoryTools" EntitySet="InventoryTools" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventoryWoodDetails_WoodDetails" Association="Self.FK_InventoryWoodDetails_WoodDetails">
-            <End Role="WoodDetails" EntitySet="WoodDetails" />
-            <End Role="InventoryWoodDetails" EntitySet="InventoryWoodDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Materials_TypeMaterials" Association="Self.FK_Materials_TypeMaterials">
-            <End Role="TypeMaterials" EntitySet="TypeMaterials" />
-            <End Role="Materials" EntitySet="Materials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StorageProduct_Products" Association="Self.FK_StorageProduct_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="StorageProduct" EntitySet="StorageProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StorageProduct_Storage" Association="Self.FK_StorageProduct_Storage">
-            <End Role="Storage" EntitySet="Storage" />
-            <End Role="StorageProduct" EntitySet="StorageProduct" />
-          </AssociationSet>
-          <EntitySet Name="Components" EntityType="CarpentryShopModel.Components" />
-          <EntitySet Name="ProductReceipts" EntityType="CarpentryShopModel.ProductReceipts" />
           <AssociationSet Name="FK_Components_ComponentReceipts" Association="CarpentryShopModel.FK_Components_ComponentReceipts">
             <End Role="ComponentReceipts" EntitySet="ComponentReceipts" />
             <End Role="Components" EntitySet="Components" />
@@ -1151,11 +648,102 @@
             <End Role="Components" EntitySet="Components" />
             <End Role="ProductReceipts" EntitySet="ProductReceipts" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailReceipts_Machines" Association="CarpentryShopModel.FK_DetailReceipts_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailReceipts_Materials" Association="CarpentryShopModel.FK_DetailReceipts_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailReceipts_Tools" Association="CarpentryShopModel.FK_DetailReceipts_Tools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Details_DetailReceipts" Association="CarpentryShopModel.FK_Details_DetailReceipts">
+            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
+            <End Role="MetalDetails" EntitySet="MetalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WoodDetails_DetailReceipts" Association="CarpentryShopModel.FK_WoodDetails_DetailReceipts">
+            <End Role="DetailReceipts" EntitySet="DetailReceipts" />
+            <End Role="WoodDetails" EntitySet="WoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryComponents_InventoryCarpenter" Association="CarpentryShopModel.FK_InventoryComponents_InventoryCarpenter">
+            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
+            <End Role="InventoryComponents" EntitySet="InventoryComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryMaterials_InventoryCarpenter" Association="CarpentryShopModel.FK_InventoryMaterials_InventoryCarpenter">
+            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
+            <End Role="InventoryMaterials" EntitySet="InventoryMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryMetalDetails_InventoryCarpenter" Association="CarpentryShopModel.FK_InventoryMetalDetails_InventoryCarpenter">
+            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
+            <End Role="InventoryMetalDetails" EntitySet="InventoryMetalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryTools_InventoryCarpenter" Association="CarpentryShopModel.FK_InventoryTools_InventoryCarpenter">
+            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
+            <End Role="InventoryTools" EntitySet="InventoryTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryWoodDetails_InventoryCarpenter" Association="CarpentryShopModel.FK_InventoryWoodDetails_InventoryCarpenter">
+            <End Role="InventoryCarpenter" EntitySet="InventoryCarpenter" />
+            <End Role="InventoryWoodDetails" EntitySet="InventoryWoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryMaterials_Materials" Association="CarpentryShopModel.FK_InventoryMaterials_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="InventoryMaterials" EntitySet="InventoryMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryDetails_Details" Association="CarpentryShopModel.FK_InventoryDetails_Details">
+            <End Role="MetalDetails" EntitySet="MetalDetails" />
+            <End Role="InventoryMetalDetails" EntitySet="InventoryMetalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryTools_Tools" Association="CarpentryShopModel.FK_InventoryTools_Tools">
+            <End Role="Tools" EntitySet="Tools" />
+            <End Role="InventoryTools" EntitySet="InventoryTools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryWoodDetails_WoodDetails" Association="CarpentryShopModel.FK_InventoryWoodDetails_WoodDetails">
+            <End Role="WoodDetails" EntitySet="WoodDetails" />
+            <End Role="InventoryWoodDetails" EntitySet="InventoryWoodDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_TypeMaterials" Association="CarpentryShopModel.FK_Materials_TypeMaterials">
+            <End Role="TypeMaterials" EntitySet="TypeMaterials" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
           <AssociationSet Name="FK_Products_ProductReceipts" Association="CarpentryShopModel.FK_Products_ProductReceipts">
             <End Role="ProductReceipts" EntitySet="ProductReceipts" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_StorageProduct_Products" Association="CarpentryShopModel.FK_StorageProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="StorageProduct" EntitySet="StorageProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageProduct_Storage" Association="CarpentryShopModel.FK_StorageProduct_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageProduct" EntitySet="StorageProduct" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Carpenter">
+          <Key>
+            <PropertyRef Name="idCarpenter" />
+          </Key>
+          <Property Name="idCarpenter" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCarpenter" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SurnameCarpenter" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageCarpenter" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryCarpenter_Carpenter" FromRole="Carpenter" ToRole="InventoryCarpenter" />
+        </EntityType>
+        <EntityType Name="ComponentReceipts">
+          <Key>
+            <PropertyRef Name="idCompontentReceipt" />
+          </Key>
+          <Property Name="idCompontentReceipt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idWoodDetail" Type="Int32" />
+          <Property Name="idTool" Type="Int32" />
+          <Property Name="idMachine" Type="Int32" />
+          <Property Name="idMetalDetail" Type="Int32" />
+          <NavigationProperty Name="MetalDetails" Relationship="CarpentryShopModel.FK_ComponentReceipts_MetalDetails" FromRole="ComponentReceipts" ToRole="MetalDetails" />
+          <NavigationProperty Name="WoodDetails" Relationship="CarpentryShopModel.FK_ComponentReceipts_WoodDetails" FromRole="ComponentReceipts" ToRole="WoodDetails" />
+          <NavigationProperty Name="Components" Relationship="CarpentryShopModel.FK_Components_ComponentReceipts" FromRole="ComponentReceipts" ToRole="Components" />
+        </EntityType>
         <EntityType Name="Components">
           <Key>
             <PropertyRef Name="idComponent" />
@@ -1168,6 +756,115 @@
           <NavigationProperty Name="ProductReceipts" Relationship="CarpentryShopModel.FK_ProductReceipts_Components" FromRole="Components" ToRole="ProductReceipts" />
           <NavigationProperty Name="ProductReceipts1" Relationship="CarpentryShopModel.FK_ProductReceipts_Components1" FromRole="Components" ToRole="ProductReceipts" />
         </EntityType>
+        <EntityType Name="DetailReceipts">
+          <Key>
+            <PropertyRef Name="idDetailReceipt" />
+          </Key>
+          <Property Name="idDetailReceipt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMaterial" Type="Int32" />
+          <Property Name="idTool" Type="Int32" />
+          <Property Name="idMachine" Type="Int32" />
+          <NavigationProperty Name="Machines" Relationship="CarpentryShopModel.FK_DetailReceipts_Machines" FromRole="DetailReceipts" ToRole="Machines" />
+          <NavigationProperty Name="Materials" Relationship="CarpentryShopModel.FK_DetailReceipts_Materials" FromRole="DetailReceipts" ToRole="Materials" />
+          <NavigationProperty Name="Tools" Relationship="CarpentryShopModel.FK_DetailReceipts_Tools" FromRole="DetailReceipts" ToRole="Tools" />
+          <NavigationProperty Name="MetalDetails" Relationship="CarpentryShopModel.FK_Details_DetailReceipts" FromRole="DetailReceipts" ToRole="MetalDetails" />
+          <NavigationProperty Name="WoodDetails" Relationship="CarpentryShopModel.FK_WoodDetails_DetailReceipts" FromRole="DetailReceipts" ToRole="WoodDetails" />
+        </EntityType>
+        <EntityType Name="InventoryCarpenter">
+          <Key>
+            <PropertyRef Name="idInventory" />
+          </Key>
+          <Property Name="idInventory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCarpenter" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carpenter" Relationship="CarpentryShopModel.FK_InventoryCarpenter_Carpenter" FromRole="InventoryCarpenter" ToRole="Carpenter" />
+          <NavigationProperty Name="InventoryComponents" Relationship="CarpentryShopModel.FK_InventoryComponents_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryComponents" />
+          <NavigationProperty Name="InventoryMaterials" Relationship="CarpentryShopModel.FK_InventoryMaterials_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryMaterials" />
+          <NavigationProperty Name="InventoryMetalDetails" Relationship="CarpentryShopModel.FK_InventoryMetalDetails_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryMetalDetails" />
+          <NavigationProperty Name="InventoryTools" Relationship="CarpentryShopModel.FK_InventoryTools_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryTools" />
+          <NavigationProperty Name="InventoryWoodDetails" Relationship="CarpentryShopModel.FK_InventoryWoodDetails_InventoryCarpenter" FromRole="InventoryCarpenter" ToRole="InventoryWoodDetails" />
+        </EntityType>
+        <EntityType Name="InventoryComponents">
+          <Key>
+            <PropertyRef Name="idInventoryComponent" />
+          </Key>
+          <Property Name="idInventoryComponent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idComponent" Type="Int32" Nullable="false" />
+          <Property Name="idInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryComponents_InventoryCarpenter" FromRole="InventoryComponents" ToRole="InventoryCarpenter" />
+        </EntityType>
+        <EntityType Name="InventoryMaterials">
+          <Key>
+            <PropertyRef Name="idInventoryMaterial" />
+          </Key>
+          <Property Name="idInventoryMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMaterial" Type="Int32" Nullable="false" />
+          <Property Name="idInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryMaterials_InventoryCarpenter" FromRole="InventoryMaterials" ToRole="InventoryCarpenter" />
+          <NavigationProperty Name="Materials" Relationship="CarpentryShopModel.FK_InventoryMaterials_Materials" FromRole="InventoryMaterials" ToRole="Materials" />
+        </EntityType>
+        <EntityType Name="InventoryMetalDetails">
+          <Key>
+            <PropertyRef Name="idInventoryMetalDetail" />
+          </Key>
+          <Property Name="idInventoryMetalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMetalDetail" Type="Int32" Nullable="false" />
+          <Property Name="idInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryMetalDetails_InventoryCarpenter" FromRole="InventoryMetalDetails" ToRole="InventoryCarpenter" />
+          <NavigationProperty Name="MetalDetails" Relationship="CarpentryShopModel.FK_InventoryDetails_Details" FromRole="InventoryMetalDetails" ToRole="MetalDetails" />
+        </EntityType>
+        <EntityType Name="InventoryTools">
+          <Key>
+            <PropertyRef Name="idInventoryTool" />
+          </Key>
+          <Property Name="idInventoryTool" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTool" Type="Int32" Nullable="false" />
+          <Property Name="idInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryTools_InventoryCarpenter" FromRole="InventoryTools" ToRole="InventoryCarpenter" />
+          <NavigationProperty Name="Tools" Relationship="CarpentryShopModel.FK_InventoryTools_Tools" FromRole="InventoryTools" ToRole="Tools" />
+        </EntityType>
+        <EntityType Name="InventoryWoodDetails">
+          <Key>
+            <PropertyRef Name="idInventoryWoodDetail" />
+          </Key>
+          <Property Name="idInventoryWoodDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idWoodDetail" Type="Int32" Nullable="false" />
+          <Property Name="idInventory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryCarpenter" Relationship="CarpentryShopModel.FK_InventoryWoodDetails_InventoryCarpenter" FromRole="InventoryWoodDetails" ToRole="InventoryCarpenter" />
+          <NavigationProperty Name="WoodDetails" Relationship="CarpentryShopModel.FK_InventoryWoodDetails_WoodDetails" FromRole="InventoryWoodDetails" ToRole="WoodDetails" />
+        </EntityType>
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="idMachine" />
+          </Key>
+          <Property Name="idMachine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameMachine" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageMachine" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DetailReceipts" Relationship="CarpentryShopModel.FK_DetailReceipts_Machines" FromRole="Machines" ToRole="DetailReceipts" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="idMaterial" />
+          </Key>
+          <Property Name="idMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTypeMaterial" Type="Int32" Nullable="false" />
+          <Property Name="ImageMaterial" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NameMaterial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetailReceipts" Relationship="CarpentryShopModel.FK_DetailReceipts_Materials" FromRole="Materials" ToRole="DetailReceipts" />
+          <NavigationProperty Name="InventoryMaterials" Relationship="CarpentryShopModel.FK_InventoryMaterials_Materials" FromRole="Materials" ToRole="InventoryMaterials" />
+          <NavigationProperty Name="TypeMaterials" Relationship="CarpentryShopModel.FK_Materials_TypeMaterials" FromRole="Materials" ToRole="TypeMaterials" />
+        </EntityType>
+        <EntityType Name="MetalDetails">
+          <Key>
+            <PropertyRef Name="idMetalDetail" />
+          </Key>
+          <Property Name="idMetalDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameMetalDetail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageMetalDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idDetailReceipt" Type="Int32" />
+          <NavigationProperty Name="ComponentReceipts" Relationship="CarpentryShopModel.FK_ComponentReceipts_MetalDetails" FromRole="MetalDetails" ToRole="ComponentReceipts" />
+          <NavigationProperty Name="DetailReceipts" Relationship="CarpentryShopModel.FK_Details_DetailReceipts" FromRole="MetalDetails" ToRole="DetailReceipts" />
+          <NavigationProperty Name="InventoryMetalDetails" Relationship="CarpentryShopModel.FK_InventoryDetails_Details" FromRole="MetalDetails" ToRole="InventoryMetalDetails" />
+        </EntityType>
         <EntityType Name="ProductReceipts">
           <Key>
             <PropertyRef Name="idProductReceipt" />
@@ -1179,6 +876,101 @@
           <NavigationProperty Name="Components1" Relationship="CarpentryShopModel.FK_ProductReceipts_Components1" FromRole="ProductReceipts" ToRole="Components" />
           <NavigationProperty Name="Products" Relationship="CarpentryShopModel.FK_Products_ProductReceipts" FromRole="ProductReceipts" ToRole="Products" />
         </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idProductReceipt" Type="Int32" />
+          <NavigationProperty Name="ProductReceipts" Relationship="CarpentryShopModel.FK_Products_ProductReceipts" FromRole="Products" ToRole="ProductReceipts" />
+          <NavigationProperty Name="StorageProduct" Relationship="CarpentryShopModel.FK_StorageProduct_Products" FromRole="Products" ToRole="StorageProduct" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="idStorage" />
+          </Key>
+          <Property Name="idStorage" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StorageProduct" Relationship="CarpentryShopModel.FK_StorageProduct_Storage" FromRole="Storage" ToRole="StorageProduct" />
+        </EntityType>
+        <EntityType Name="StorageProduct">
+          <Key>
+            <PropertyRef Name="idStorageProduct" />
+          </Key>
+          <Property Name="idStorageProduct" Type="Int32" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="idStorage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="CarpentryShopModel.FK_StorageProduct_Products" FromRole="StorageProduct" ToRole="Products" />
+          <NavigationProperty Name="Storage" Relationship="CarpentryShopModel.FK_StorageProduct_Storage" FromRole="StorageProduct" ToRole="Storage" />
+        </EntityType>
+        <EntityType Name="Tools">
+          <Key>
+            <PropertyRef Name="idTool" />
+          </Key>
+          <Property Name="idTool" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameTool" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageTool" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DetailReceipts" Relationship="CarpentryShopModel.FK_DetailReceipts_Tools" FromRole="Tools" ToRole="DetailReceipts" />
+          <NavigationProperty Name="InventoryTools" Relationship="CarpentryShopModel.FK_InventoryTools_Tools" FromRole="Tools" ToRole="InventoryTools" />
+        </EntityType>
+        <EntityType Name="TypeMaterials">
+          <Key>
+            <PropertyRef Name="idTypeMaterial" />
+          </Key>
+          <Property Name="idTypeMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Materials" Relationship="CarpentryShopModel.FK_Materials_TypeMaterials" FromRole="TypeMaterials" ToRole="Materials" />
+        </EntityType>
+        <EntityType Name="WoodDetails">
+          <Key>
+            <PropertyRef Name="idWoodDetail" />
+          </Key>
+          <Property Name="idWoodDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameWoodDetail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageWoodDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idDetailReceipt" Type="Int32" />
+          <NavigationProperty Name="ComponentReceipts" Relationship="CarpentryShopModel.FK_ComponentReceipts_WoodDetails" FromRole="WoodDetails" ToRole="ComponentReceipts" />
+          <NavigationProperty Name="DetailReceipts" Relationship="CarpentryShopModel.FK_WoodDetails_DetailReceipts" FromRole="WoodDetails" ToRole="DetailReceipts" />
+          <NavigationProperty Name="InventoryWoodDetails" Relationship="CarpentryShopModel.FK_InventoryWoodDetails_WoodDetails" FromRole="WoodDetails" ToRole="InventoryWoodDetails" />
+        </EntityType>
+        <Association Name="FK_InventoryCarpenter_Carpenter">
+          <End Type="CarpentryShopModel.Carpenter" Role="Carpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carpenter">
+              <PropertyRef Name="idCarpenter" />
+            </Principal>
+            <Dependent Role="InventoryCarpenter">
+              <PropertyRef Name="idCarpenter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComponentReceipts_MetalDetails">
+          <End Type="CarpentryShopModel.MetalDetails" Role="MetalDetails" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.ComponentReceipts" Role="ComponentReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetalDetails">
+              <PropertyRef Name="idMetalDetail" />
+            </Principal>
+            <Dependent Role="ComponentReceipts">
+              <PropertyRef Name="idMetalDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComponentReceipts_WoodDetails">
+          <End Type="CarpentryShopModel.WoodDetails" Role="WoodDetails" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.ComponentReceipts" Role="ComponentReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WoodDetails">
+              <PropertyRef Name="idWoodDetail" />
+            </Principal>
+            <Dependent Role="ComponentReceipts">
+              <PropertyRef Name="idWoodDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Components_ComponentReceipts">
           <End Type="CarpentryShopModel.ComponentReceipts" Role="ComponentReceipts" Multiplicity="0..1" />
           <End Type="CarpentryShopModel.Components" Role="Components" Multiplicity="*" />
@@ -1215,6 +1007,186 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetailReceipts_Machines">
+          <End Type="CarpentryShopModel.Machines" Role="Machines" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.DetailReceipts" Role="DetailReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="idMachine" />
+            </Principal>
+            <Dependent Role="DetailReceipts">
+              <PropertyRef Name="idMachine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReceipts_Materials">
+          <End Type="CarpentryShopModel.Materials" Role="Materials" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.DetailReceipts" Role="DetailReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMaterial" />
+            </Principal>
+            <Dependent Role="DetailReceipts">
+              <PropertyRef Name="idMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReceipts_Tools">
+          <End Type="CarpentryShopModel.Tools" Role="Tools" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.DetailReceipts" Role="DetailReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="idTool" />
+            </Principal>
+            <Dependent Role="DetailReceipts">
+              <PropertyRef Name="idTool" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Details_DetailReceipts">
+          <End Type="CarpentryShopModel.DetailReceipts" Role="DetailReceipts" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.MetalDetails" Role="MetalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailReceipts">
+              <PropertyRef Name="idDetailReceipt" />
+            </Principal>
+            <Dependent Role="MetalDetails">
+              <PropertyRef Name="idDetailReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WoodDetails_DetailReceipts">
+          <End Type="CarpentryShopModel.DetailReceipts" Role="DetailReceipts" Multiplicity="0..1" />
+          <End Type="CarpentryShopModel.WoodDetails" Role="WoodDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailReceipts">
+              <PropertyRef Name="idDetailReceipt" />
+            </Principal>
+            <Dependent Role="WoodDetails">
+              <PropertyRef Name="idDetailReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryComponents_InventoryCarpenter">
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryComponents" Role="InventoryComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryCarpenter">
+              <PropertyRef Name="idInventory" />
+            </Principal>
+            <Dependent Role="InventoryComponents">
+              <PropertyRef Name="idInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryMaterials_InventoryCarpenter">
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryMaterials" Role="InventoryMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryCarpenter">
+              <PropertyRef Name="idInventory" />
+            </Principal>
+            <Dependent Role="InventoryMaterials">
+              <PropertyRef Name="idInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryMetalDetails_InventoryCarpenter">
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryMetalDetails" Role="InventoryMetalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryCarpenter">
+              <PropertyRef Name="idInventory" />
+            </Principal>
+            <Dependent Role="InventoryMetalDetails">
+              <PropertyRef Name="idInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryTools_InventoryCarpenter">
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryTools" Role="InventoryTools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryCarpenter">
+              <PropertyRef Name="idInventory" />
+            </Principal>
+            <Dependent Role="InventoryTools">
+              <PropertyRef Name="idInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryWoodDetails_InventoryCarpenter">
+          <End Type="CarpentryShopModel.InventoryCarpenter" Role="InventoryCarpenter" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryWoodDetails" Role="InventoryWoodDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryCarpenter">
+              <PropertyRef Name="idInventory" />
+            </Principal>
+            <Dependent Role="InventoryWoodDetails">
+              <PropertyRef Name="idInventory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryMaterials_Materials">
+          <End Type="CarpentryShopModel.Materials" Role="Materials" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryMaterials" Role="InventoryMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMaterial" />
+            </Principal>
+            <Dependent Role="InventoryMaterials">
+              <PropertyRef Name="idMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryDetails_Details">
+          <End Type="CarpentryShopModel.MetalDetails" Role="MetalDetails" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryMetalDetails" Role="InventoryMetalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetalDetails">
+              <PropertyRef Name="idMetalDetail" />
+            </Principal>
+            <Dependent Role="InventoryMetalDetails">
+              <PropertyRef Name="idMetalDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryTools_Tools">
+          <End Type="CarpentryShopModel.Tools" Role="Tools" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryTools" Role="InventoryTools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools">
+              <PropertyRef Name="idTool" />
+            </Principal>
+            <Dependent Role="InventoryTools">
+              <PropertyRef Name="idTool" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryWoodDetails_WoodDetails">
+          <End Type="CarpentryShopModel.WoodDetails" Role="WoodDetails" Multiplicity="1" />
+          <End Type="CarpentryShopModel.InventoryWoodDetails" Role="InventoryWoodDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WoodDetails">
+              <PropertyRef Name="idWoodDetail" />
+            </Principal>
+            <Dependent Role="InventoryWoodDetails">
+              <PropertyRef Name="idWoodDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_TypeMaterials">
+          <End Type="CarpentryShopModel.TypeMaterials" Role="TypeMaterials" Multiplicity="1" />
+          <End Type="CarpentryShopModel.Materials" Role="Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMaterials">
+              <PropertyRef Name="idTypeMaterial" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="idTypeMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_ProductReceipts">
           <End Type="CarpentryShopModel.ProductReceipts" Role="ProductReceipts" Multiplicity="0..1" />
           <End Type="CarpentryShopModel.Products" Role="Products" Multiplicity="*" />
@@ -1227,154 +1199,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_StorageProduct_Products">
+          <End Type="CarpentryShopModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="CarpentryShopModel.StorageProduct" Role="StorageProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="StorageProduct">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageProduct_Storage">
+          <End Type="CarpentryShopModel.Storage" Role="Storage" Multiplicity="1" />
+          <End Type="CarpentryShopModel.StorageProduct" Role="StorageProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="idStorage" />
+            </Principal>
+            <Dependent Role="StorageProduct">
+              <PropertyRef Name="idStorage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище CarpentryShopModelContainer" CdmEntityContainer="CarpentryShopEntities3">
-          <EntitySetMapping Name="Carpenter">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Carpenter">
-              <MappingFragment StoreEntitySet="Carpenter">
-                <ScalarProperty Name="idCarpenter" ColumnName="idCarpenter" />
-                <ScalarProperty Name="NameCarpenter" ColumnName="NameCarpenter" />
-                <ScalarProperty Name="SurnameCarpenter" ColumnName="SurnameCarpenter" />
-                <ScalarProperty Name="ImageCarpenter" ColumnName="ImageCarpenter" />
-                <ScalarProperty Name="StaminaCarpenter" ColumnName="StaminaCarpenter" />
-                <ScalarProperty Name="BalanceCarpenter" ColumnName="BalanceCarpenter" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ComponentReceipts">
-            <EntityTypeMapping TypeName="CarpentryShopModel.ComponentReceipts">
-              <MappingFragment StoreEntitySet="ComponentReceipts">
-                <ScalarProperty Name="idCompontentReceipt" ColumnName="idCompontentReceipt" />
-                <ScalarProperty Name="idWoodDetail" ColumnName="idWoodDetail" />
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
-                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetailReceipts">
-            <EntityTypeMapping TypeName="CarpentryShopModel.DetailReceipts">
-              <MappingFragment StoreEntitySet="DetailReceipts">
-                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
-                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryCarpenter">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryCarpenter">
-              <MappingFragment StoreEntitySet="InventoryCarpenter">
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-                <ScalarProperty Name="idCarpenter" ColumnName="idCarpenter" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryComponents">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryComponents">
-              <MappingFragment StoreEntitySet="InventoryComponents">
-                <ScalarProperty Name="idInventoryComponent" ColumnName="idInventoryComponent" />
-                <ScalarProperty Name="idComponent" ColumnName="idComponent" />
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryMaterials">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryMaterials">
-              <MappingFragment StoreEntitySet="InventoryMaterials">
-                <ScalarProperty Name="idInventoryMaterial" ColumnName="idInventoryMaterial" />
-                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryMetalDetails">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryMetalDetails">
-              <MappingFragment StoreEntitySet="InventoryMetalDetails">
-                <ScalarProperty Name="idInventoryMetalDetail" ColumnName="idInventoryMetalDetail" />
-                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryTools">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryTools">
-              <MappingFragment StoreEntitySet="InventoryTools">
-                <ScalarProperty Name="idInventoryTool" ColumnName="idInventoryTool" />
-                <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryWoodDetails">
-            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryWoodDetails">
-              <MappingFragment StoreEntitySet="InventoryWoodDetails">
-                <ScalarProperty Name="idInventoryWoodDetail" ColumnName="idInventoryWoodDetail" />
-                <ScalarProperty Name="idWoodDetail" ColumnName="idWoodDetail" />
-                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Machines">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Machines">
-              <MappingFragment StoreEntitySet="Machines">
-                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
-                <ScalarProperty Name="NameMachine" ColumnName="NameMachine" />
-                <ScalarProperty Name="ImageMachine" ColumnName="ImageMachine" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Materials">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Materials">
-              <MappingFragment StoreEntitySet="Materials">
-                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
-                <ScalarProperty Name="idTypeMaterial" ColumnName="idTypeMaterial" />
-                <ScalarProperty Name="ImageMaterial" ColumnName="ImageMaterial" />
-                <ScalarProperty Name="NameMaterial" ColumnName="NameMaterial" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MetalDetails">
-            <EntityTypeMapping TypeName="CarpentryShopModel.MetalDetails">
-              <MappingFragment StoreEntitySet="MetalDetails">
-                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
-                <ScalarProperty Name="NameMetalDetail" ColumnName="NameMetalDetail" />
-                <ScalarProperty Name="ImageMetalDetail" ColumnName="ImageMetalDetail" />
-                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Products">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
-                <ScalarProperty Name="ImageProduct" ColumnName="ImageProduct" />
-                <ScalarProperty Name="idProductReceipt" ColumnName="idProductReceipt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Storage">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Storage">
-              <MappingFragment StoreEntitySet="Storage">
-                <ScalarProperty Name="idStorage" ColumnName="idStorage" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StorageProduct">
-            <EntityTypeMapping TypeName="CarpentryShopModel.StorageProduct">
-              <MappingFragment StoreEntitySet="StorageProduct">
-                <ScalarProperty Name="idStorageProduct" ColumnName="idStorageProduct" />
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-                <ScalarProperty Name="idStorage" ColumnName="idStorage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="CarpentryShopModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1386,30 +1240,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tools">
-            <EntityTypeMapping TypeName="CarpentryShopModel.Tools">
-              <MappingFragment StoreEntitySet="Tools">
+          <EntitySetMapping Name="Carpenter">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Carpenter">
+              <MappingFragment StoreEntitySet="Carpenter">
+                <ScalarProperty Name="ImageCarpenter" ColumnName="ImageCarpenter" />
+                <ScalarProperty Name="SurnameCarpenter" ColumnName="SurnameCarpenter" />
+                <ScalarProperty Name="NameCarpenter" ColumnName="NameCarpenter" />
+                <ScalarProperty Name="idCarpenter" ColumnName="idCarpenter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentReceipts">
+            <EntityTypeMapping TypeName="CarpentryShopModel.ComponentReceipts">
+              <MappingFragment StoreEntitySet="ComponentReceipts">
+                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
+                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
                 <ScalarProperty Name="idTool" ColumnName="idTool" />
-                <ScalarProperty Name="NameTool" ColumnName="NameTool" />
-                <ScalarProperty Name="ImageTool" ColumnName="ImageTool" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeMaterials">
-            <EntityTypeMapping TypeName="CarpentryShopModel.TypeMaterials">
-              <MappingFragment StoreEntitySet="TypeMaterials">
-                <ScalarProperty Name="idTypeMaterial" ColumnName="idTypeMaterial" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WoodDetails">
-            <EntityTypeMapping TypeName="CarpentryShopModel.WoodDetails">
-              <MappingFragment StoreEntitySet="WoodDetails">
                 <ScalarProperty Name="idWoodDetail" ColumnName="idWoodDetail" />
-                <ScalarProperty Name="NameWoodDetail" ColumnName="NameWoodDetail" />
-                <ScalarProperty Name="ImageWoodDetail" ColumnName="ImageWoodDetail" />
-                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
+                <ScalarProperty Name="idCompontentReceipt" ColumnName="idCompontentReceipt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1423,6 +1271,98 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DetailReceipts">
+            <EntityTypeMapping TypeName="CarpentryShopModel.DetailReceipts">
+              <MappingFragment StoreEntitySet="DetailReceipts">
+                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryCarpenter">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryCarpenter">
+              <MappingFragment StoreEntitySet="InventoryCarpenter">
+                <ScalarProperty Name="idCarpenter" ColumnName="idCarpenter" />
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryComponents">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryComponents">
+              <MappingFragment StoreEntitySet="InventoryComponents">
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+                <ScalarProperty Name="idComponent" ColumnName="idComponent" />
+                <ScalarProperty Name="idInventoryComponent" ColumnName="idInventoryComponent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryMaterials">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryMaterials">
+              <MappingFragment StoreEntitySet="InventoryMaterials">
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+                <ScalarProperty Name="idInventoryMaterial" ColumnName="idInventoryMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryMetalDetails">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryMetalDetails">
+              <MappingFragment StoreEntitySet="InventoryMetalDetails">
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
+                <ScalarProperty Name="idInventoryMetalDetail" ColumnName="idInventoryMetalDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryTools">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryTools">
+              <MappingFragment StoreEntitySet="InventoryTools">
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+                <ScalarProperty Name="idInventoryTool" ColumnName="idInventoryTool" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryWoodDetails">
+            <EntityTypeMapping TypeName="CarpentryShopModel.InventoryWoodDetails">
+              <MappingFragment StoreEntitySet="InventoryWoodDetails">
+                <ScalarProperty Name="idInventory" ColumnName="idInventory" />
+                <ScalarProperty Name="idWoodDetail" ColumnName="idWoodDetail" />
+                <ScalarProperty Name="idInventoryWoodDetail" ColumnName="idInventoryWoodDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Machines">
+              <MappingFragment StoreEntitySet="Machines">
+                <ScalarProperty Name="ImageMachine" ColumnName="ImageMachine" />
+                <ScalarProperty Name="NameMachine" ColumnName="NameMachine" />
+                <ScalarProperty Name="idMachine" ColumnName="idMachine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="NameMaterial" ColumnName="NameMaterial" />
+                <ScalarProperty Name="ImageMaterial" ColumnName="ImageMaterial" />
+                <ScalarProperty Name="idTypeMaterial" ColumnName="idTypeMaterial" />
+                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetalDetails">
+            <EntityTypeMapping TypeName="CarpentryShopModel.MetalDetails">
+              <MappingFragment StoreEntitySet="MetalDetails">
+                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
+                <ScalarProperty Name="ImageMetalDetail" ColumnName="ImageMetalDetail" />
+                <ScalarProperty Name="NameMetalDetail" ColumnName="NameMetalDetail" />
+                <ScalarProperty Name="idMetalDetail" ColumnName="idMetalDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductReceipts">
             <EntityTypeMapping TypeName="CarpentryShopModel.ProductReceipts">
               <MappingFragment StoreEntitySet="ProductReceipts">
@@ -1432,7 +1372,61 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="idProductReceipt" ColumnName="idProductReceipt" />
+                <ScalarProperty Name="ImageProduct" ColumnName="ImageProduct" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idStorage" ColumnName="idStorage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageProduct">
+            <EntityTypeMapping TypeName="CarpentryShopModel.StorageProduct">
+              <MappingFragment StoreEntitySet="StorageProduct">
+                <ScalarProperty Name="idStorage" ColumnName="idStorage" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idStorageProduct" ColumnName="idStorageProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="CarpentryShopModel.Tools">
+              <MappingFragment StoreEntitySet="Tools">
+                <ScalarProperty Name="ImageTool" ColumnName="ImageTool" />
+                <ScalarProperty Name="NameTool" ColumnName="NameTool" />
+                <ScalarProperty Name="idTool" ColumnName="idTool" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMaterials">
+            <EntityTypeMapping TypeName="CarpentryShopModel.TypeMaterials">
+              <MappingFragment StoreEntitySet="TypeMaterials">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idTypeMaterial" ColumnName="idTypeMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WoodDetails">
+            <EntityTypeMapping TypeName="CarpentryShopModel.WoodDetails">
+              <MappingFragment StoreEntitySet="WoodDetails">
+                <ScalarProperty Name="idDetailReceipt" ColumnName="idDetailReceipt" />
+                <ScalarProperty Name="ImageWoodDetail" ColumnName="ImageWoodDetail" />
+                <ScalarProperty Name="NameWoodDetail" ColumnName="NameWoodDetail" />
+                <ScalarProperty Name="idWoodDetail" ColumnName="idWoodDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
