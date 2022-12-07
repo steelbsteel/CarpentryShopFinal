@@ -142,14 +142,12 @@ namespace CarpentryShop.Windows
         {
             var detailReceiptsWindow = new DetailsReceiptsWIndow();
             detailReceiptsWindow.Show();
-            this.Close();
         }
 
         private void EventViewComponentsReceipts(object sender, RoutedEventArgs e)
         {
             var componentsReceiptsWindow = new ComponentsReceipts();
             componentsReceiptsWindow.Show();
-            this.Close();
         }
 
         private void EventSamStalOpen(object sender, RoutedEventArgs e)
